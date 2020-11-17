@@ -31,7 +31,7 @@ spec:
                 kind: CronJob
                 metadata:
                   name: hello
-                  namespace: default
+                  namespace: development
                 spec:
                   schedule: "*/1 * * * *"
                   jobTemplate:
