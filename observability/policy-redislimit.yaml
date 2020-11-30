@@ -25,20 +25,22 @@ spec:
             - complianceType: musthave
               objectDefinition:
                 apiVersion: v1
-                kind: Pod # nginx pod must exist
+                kind: deployment # nginx pod must exist
                 metadata:
                   # name: sample-nginx-pod
                   # generateName: observability-observatorium-thanos-receive-default-
-                  name: search-prod-a84df-redisgraph-6f4d4554d6-gbksw
+                  name: search-prod-a84df-redisgraph
                 spec:
-                  containers:
-                  - resources:
-                      limits:
-                        cpu: 1000m
-                        memory: 3Gi
-                      requests:
-                        cpu: 100m
-                        memory: 256Mi                                          
+                  template:
+                    spec:
+                      containers:
+                        - resources:
+                            limits:
+                              cpu: 1000m
+                              memory: 3Gi
+                            requests:
+                              cpu: 100m
+                              memory: 256Mi                                          
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
