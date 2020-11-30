@@ -34,16 +34,15 @@ spec:
                   labels:
                     component: redisgraph
                 spec:
-                  template:
-                    spec:
-                      containers:
-                        - resources:
-                            limits:
-                              cpu: 1000m
-                              memory: 3Gi
-                            requests:
-                              cpu: 100m
-                              memory: 256Mi                                          
+                  template
+                    containers:
+                      - resources:
+                          limits:
+                            cpu: 1000m
+                            memory: 3Gi
+                          requests:
+                            cpu: 100m
+                            memory: 256Mi                                          
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
