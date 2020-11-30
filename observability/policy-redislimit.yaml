@@ -29,7 +29,7 @@ spec:
                 metadata:
                   # name: sample-nginx-pod
                   # generateName: observability-observatorium-thanos-receive-default-
-                  name: search-prod-*-redisgraph-*
+                  name: search-prod-a84df-redisgraph-6f4d4554d6-gbksw
                 spec:
                   containers:
                   - resources:
