@@ -30,6 +30,7 @@ spec:
                   # name: sample-nginx-pod
                   # generateName: observability-observatorium-thanos-receive-default-
                   # name: search-prod-a84df-redisgraph
+                  namespace: open-cluster-management
                   labels:
                     component: redisgraph
                 spec:
