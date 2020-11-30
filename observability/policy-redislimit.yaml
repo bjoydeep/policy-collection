@@ -34,7 +34,7 @@ spec:
                   labels:
                     component: redisgraph
                 spec:
-                  template
+                  template:
                     containers:
                       - resources:
                           limits:
