@@ -1,0 +1,66 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-redislimit
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-redislimit-example
+        spec:
+          remediationAction: inform # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
+          severity: medium
+          namespaceSelector:
+            exclude: ["kube-*"]
+            include: ["open-cluster-management"]
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: Pod # nginx pod must exist
+                metadata:
+                  # name: sample-nginx-pod
+                  # generateName: observability-observatorium-thanos-receive-default-
+                  name: search-prod-*
+                spec:
+                  containers:
+                  - resources:
+                      limits:
+                        cpu: 1000m
+                        memory: 3Gi
+                      requests:
+                        cpu: 100m
+                        memory: 256Mi                                          
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-redislimit
+placementRef:
+  name: placement-policy-redislimit
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-redislimit
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-redislimit
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: name, operator: In, values: ["local-cluster"]}
