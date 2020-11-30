@@ -25,7 +25,7 @@ spec:
             - complianceType: musthave
               objectDefinition:
                 apiVersion: v1
-                kind: deployment # nginx pod must exist
+                kind: Deployment # nginx pod must exist
                 metadata:
                   # name: sample-nginx-pod
                   # generateName: observability-observatorium-thanos-receive-default-
