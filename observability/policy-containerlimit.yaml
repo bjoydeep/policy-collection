@@ -28,7 +28,8 @@ spec:
                 kind: Pod # nginx pod must exist
                 metadata:
                   # name: sample-nginx-pod
-                  generateName: observability-observatorium-thanos-receive-default-
+                  # generateName: observability-observatorium-thanos-receive-default-
+                  name: observability-observatorium-thanos-receive-default-0
                 spec:
                   containers:
                   - resources:
